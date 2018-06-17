@@ -7,23 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- Latest compiled and minified CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 
     <!--Firebase-->
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 </head>
 <body>
-    <div class = "container text-center">
+    <div class = "container text-center headerContainer">
         <div class= "jumbotron">
             <h1>Train Schedule</h1>
         </div>
     </div>
-    <div class = "container text-center">
+    <div class = "container tableContainer">
         <div class= "row">
             <div class="table-responsive">
-                <table class = "table table-hover">
-                    <h2>Current Train Schedule</h2>
+                <table class = "table">
+                    <h2 class = "text-left">Current Train Schedule</h2>
                     <thead>
                         <tr>
                             <th>Train Name</th>
@@ -45,7 +48,7 @@
     <br>
     <br>
     <br>
-    <div class = "container text-left" id = "form">
+    <div class = "container text-left formContainer" id = "form">
         <h3 id = "addTrainHeader">Add Train</h3>
         <form>
             <div class = "form-group">

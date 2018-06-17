@@ -68,5 +68,10 @@ $(document).ready(function(){
         }
 
     });
-
+    //adding bg slidshow for style
+    $.backstretch([
+        "assets/images/bg.jpg"
+      , "assets/images/bg2.jpg"
+      , "assets/images/bg3.jpg"
+    ], {duration: 6000, fade: 750});
 })

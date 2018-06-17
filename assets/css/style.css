@@ -1,0 +1,37 @@
+div {
+    background-color: rgba(0, 0, 0, 0.616);
+    color: white;
+}
+input {
+    border:0;
+    border-radius: 0%;
+    color: white;
+    background-color: #444;
+}
+
+.jumbotron {
+    background-color: transparent;
+}
+.table-hover {
+    
+    color: white;
+}
+.headerContainer {
+    font-family: 'Cinzel', serif;
+    font-weight: 300;
+}
+.tableContainer {
+    font-family: 'Cinzel', serif;
+    font-weight: 300;
+}
+.formContainer {
+    font-family: 'Cinzel', serif;
+    font-weight: 300;
+    padding: 15px;
+}
+#add {
+    padding:15px;
+    background-color: black;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
