@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 // Firebase Config
-    let config = {
+    var config = {
         apiKey: "AIzaSyC-DcaBOCFBQjwkQdWd4PGgqf7Tu0i05uQ",
         authDomain: "trainschedule-ebf45.firebaseapp.com",
         databaseURL: "https://trainschedule-ebf45.firebaseio.com",
@@ -9,27 +9,34 @@ $(document).ready(function(){
         storageBucket: "",
         messagingSenderId: "15990101701"
     };
-//Firebase initialize
+//Firebase initialize connecting to the Backend service
     firebase.initializeApp(config); 
-//Creating a database variable assigning to firebase
-    let database = firebase.database();
+
+//Storing firebase.database variable into database variable container
+    var database = firebase.database();
+
+/* FROM FIREBASE DOCUMENTATION */
+
 //Creating and selecting trainInfo child in the root directory and setting up active child added listener
     database.ref("trainInfo").on("child_added",function(snapshot){
-//Creating variables to perform time calculations
+
+//Creating variables to perform time calculations using Moment.js
+
         //Converting train start time into 1-12 subtracting a year from the day 
-        let firstTrainTimeConversion = moment(snapshot.val().firstTrainTime, "hh:mm").subtract(1, "years");
+        var firstTrainTimeConversion = moment(snapshot.val().firstTrainTime, "hh:mm").subtract(1, "years");
         //Finding time difference between current time and the converted time
-        let timeDifference = moment().diff(moment(firstTrainTimeConversion), "minutes");
+        var timeDifference = moment().diff(moment(firstTrainTimeConversion), "minutes");
         //storing the remainder of time difference and the frequency
-        let timeRemainder = timeDifference % snapshot.val().Frequency;
+        var timeRemainder = timeDifference % snapshot.val().Frequency;
         //storing the minutes away value by subtracting time remainder from the frequency
-        let minutesAway = snapshot.val().Frequency - timeRemainder;
+        var minutesAway = snapshot.val().Frequency - timeRemainder;
         //storing the next arrival by adding minutes away to current time
-        let nextArrival = moment().add(minutesAway, "minutes");
+        var nextArrival = moment().add(minutesAway, "minutes");
         //formatting and storing formatted version of the next arrival value as 1-12 with AM/PM
-        let nextArrivalFormatted = moment(nextArrival).format("hh:mm A");
+        var nextArrivalFormatted = moment(nextArrival).format("hh:mm A");
         //Grab the tBody id element and add the trainName, Destination, Frequency values from the database
-            // display the calculated nextArrival time & minutesAway local value 
+
+        // display the calculated nextArrival time & minutesAway local value 
         $("#tBody").append(`
         <tr>
         <td>${snapshot.val().trainName}</td>
@@ -49,7 +56,7 @@ $(document).ready(function(){
         event.preventDefault();
 
         //create a trainInfo object with the nodes trainName, Destination, 1stTrainTime, Frequency assigning to user's input values
-        let trainInfo = {
+        var trainInfo = {
             trainName:$("#trainName").val(),
             Destination: $("#destination").val(),
             firstTrainTime: $("#firstTrainTime").val(),
