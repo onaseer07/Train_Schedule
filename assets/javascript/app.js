@@ -19,35 +19,66 @@ $(document).ready(function(){
 
 //Creating and selecting trainInfo child in the root directory and setting up active child added listener
     database.ref("trainInfo").on("child_added",function(snapshot){
-
+        // console.log(snapshot.key);
+        
 //Creating variables to perform time calculations using Moment.js
 
         //Converting train start time into 1-12 subtracting a year from the day 
         var firstTrainTimeConversion = moment(snapshot.val().firstTrainTime, "hh:mm").subtract(1, "years");
+
         //Finding time difference between current time and the converted time
         var timeDifference = moment().diff(moment(firstTrainTimeConversion), "minutes");
+
         //storing the remainder of time difference and the frequency
         var timeRemainder = timeDifference % snapshot.val().Frequency;
+
         //storing the minutes away value by subtracting time remainder from the frequency
         var minutesAway = snapshot.val().Frequency - timeRemainder;
+
         //storing the next arrival by adding minutes away to current time
         var nextArrival = moment().add(minutesAway, "minutes");
+
         //formatting and storing formatted version of the next arrival value as 1-12 with AM/PM
         var nextArrivalFormatted = moment(nextArrival).format("hh:mm A");
+        
         //Grab the tBody id element and add the trainName, Destination, Frequency values from the database
-
+        
         // display the calculated nextArrival time & minutesAway local value 
         $("#tBody").append(`
-        <tr>
-        <td>${snapshot.val().trainName}</td>
-        <td>${snapshot.val().Destination}</td>
-        <td>${snapshot.val().Frequency}</td>
-        <td>${nextArrivalFormatted}</td>
-        <td>${minutesAway}</td>
-
-        </tr>   
+            <tr>
+            <td>${snapshot.val().trainName}</td>
+            <td>${snapshot.val().Destination}</td>
+            <td>${snapshot.val().Frequency}</td>
+            <td>${nextArrivalFormatted}</td>
+            <td>${minutesAway}</td>
+            <td>
+                <button class='deleteBtn' 
+                id=${snapshot.key}
+                data-id=${snapshot.key}>
+                X
+                </button>
+            </td>
+            </tr>   
         `)
+        deleteBtn();
     });
+
+    function deleteBtn(){
+
+        $('.deleteBtn').on('click',function(event){
+            //preventing default refresh page
+            event.preventDefault();
+            //storing html object in a variable
+            let deleteBtn = $(this);
+            console.log(deleteBtn[0].id);
+            //storing id in a variable
+            let id= deleteBtn[0].id;
+            //pointing to trainInfo path's child passing in id to grab and delete it.
+            database.ref('trainInfo/').child(id).remove();
+            //refresh the page to reflect the changes
+            window.location.reload();
+        })
+    };
 
 
     //Create an on click event listener
@@ -75,6 +106,7 @@ $(document).ready(function(){
         }
 
     });
+
     //adding bg slidshow for style
     $.backstretch([
         "assets/images/bg.jpg"

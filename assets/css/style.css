@@ -35,3 +35,15 @@ input {
     color: white;
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
 }
+.deleteBtn {
+    color:#eee;
+    background: transparent;
+    font-weight: bold;
+    transition: all .3s  ease-in-out;
+}
+.deleteBtn:hover {
+    color:black;
+    background: darkred;
+    font-weight: bold;
+    border-radius:18px; 
+}
